@@ -71,11 +71,12 @@ module.exports = {
                     date: new Date()
                 };
 
-                View.create(viewData, function(err, user) {
+                View.create(viewData, function(err, view) {
                     if (err) {
                         res.send(new Response({}, 0, 'getMessage', err));
                         return;
                     }
+
                     res.send(new Response({
                         username: user.username,
                         fromUserId: message.fromUserId,
