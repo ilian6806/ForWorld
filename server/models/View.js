@@ -81,4 +81,4 @@ viewsSchema.statics.getViewsPerMessage = function(views, callback) {
     fetchViewsData(messagesViews, messages, users, callback);
 };
 
-var View = mongoose.model('View', viewsSchema);
+module.exports = mongoose.model('View', viewsSchema);

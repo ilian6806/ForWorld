@@ -8,6 +8,7 @@ var messageSchema = mongoose.Schema({
 });
 
 var Message = mongoose.model('Message', messageSchema);
+var View =  require('../models/View');
 
 // collection hook to delete oldest record
 messageSchema.post('save', function (doc) {
@@ -20,6 +21,17 @@ messageSchema.post('save', function (doc) {
                 }
                 log(last);
                 last.remove();
+                // check for Views of this last message
+                View.find({ messageId: last._id}).exec(function(err, views) {
+                    if (err) {
+                        logError(err);
+                        return;
+                    }
+                    log(views);
+                    each(views, function() {
+                        this.remove();
+                    });
+                });
             });
         } 
     });

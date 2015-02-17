@@ -10,7 +10,7 @@ require('./server/utilities/helpers');
 require('./server/utilities/constants');
 
 define('VERSION', '1.0');
-define('MAX_MESSAGES_COUNT', 22);
+define('MAX_MESSAGES_COUNT', 2000);
 
 require('./server/config/express')(app, config);
 require('./server/config/mongoose')(config);
