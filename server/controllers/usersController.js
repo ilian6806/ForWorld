@@ -72,33 +72,6 @@ module.exports = {
                     }
                     View.getViewsPerMessage(collection, function(views) {
                         var data = (views.length) ? { messageViews: views } : {};
-                        data = { messageViews: [
-                            {
-                                "message": "Positive thinking will let you do everything better than negative thinking will.",
-                                "users": [
-                                        {
-                                            "date": "2015-02-15T12:31:42.099Z",
-                                            "username": "Stefitu",
-                                            "userCountry": "Bulgaria"
-                                        },
-                                        {
-                                            "date": "2015-02-15T12:31:42.099Z",
-                                            "username": "ilian6806",
-                                            "userCountry": "Bulgaria"
-                                        }
-                                ]
-                            },
-                            {
-                                "message": "Try to be a rainbow in someone's cloud..",
-                                "users": [
-                                        {
-                                            "date": "2015-02-15T12:31:42.099Z",
-                                            "username": "ilian6806",
-                                            "userCountry": "Bulgaria"
-                                        }
-                                ]
-                            }
-                        ]};
                         res.send(new Response(data, 1, 'login'));
                     });
                     // once returned delete these records
