@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
-    userId: { type: String, require: '{PATH is required}' },
+    userId: { type: String, require: '{PATH is required}', unique : true },
     username: { type: String, require: '{PATH is required}' },
     country: { type: String, require: '{PATH is required}' },
     userInfo: { type: String, require: '{PATH is required}' },
