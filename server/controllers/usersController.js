@@ -41,7 +41,44 @@ module.exports = {
             res.send(new Response({}, 1, 'register'));
         });
     },
-    login : function(req, res) {
+    updateUser: function(req, res) {
+        try {
+            var data = parse(req.body.data);
+            var newUserData = {
+                userId: data.userId,
+                username: data.username,
+                country: data.country,
+                userInfo: data.userInfo
+            };
+            log(newUserData);
+        } catch (err) {
+            logError(err);
+            res.send(new Response({}, 0, 'updateUser', err));
+            return;
+        }
+
+        User.findOne({ userId: newUserData.userId }, function (err, user) {
+            if (err || !user) {
+                res.send(new Response({}, 0, 'updateUser', err));
+                return;
+            }
+
+            user.username = newUserData.username;
+            user.country = newUserData.country;
+            user.userInfo = newUserData.userInfo;
+            user.lastLoginDate = new Date();
+
+            try {
+                user.save();
+                res.send(new Response({}, 1, 'updateUser', err));
+            } catch (err) {
+                logError(err);
+                res.send(new Response({}, 0, 'updateUser', err));
+                return;
+            }
+        });
+    },
+    login: function(req, res) {
         try {
             log(req.body.data)
             var userId = parse(req.body.data).userId;
@@ -102,6 +139,31 @@ module.exports = {
                 country: user.country,
                 userInfo: user.userInfo
             }, 1, 'getUserInfo'));
+        });
+    },
+    checkForUser: function(req, res) {
+        try {
+            var userId = parse(req.body.data).userId;
+        } catch (err) {
+            logError(err);
+            res.send(new Response({}, 0, 'checkForUser', err));
+            return;
+        }
+
+        User.findOne({ userId: userId }, function(err, user) {
+            if (err) {
+                res.send(new Response({}, 0, 'checkForUser', err));
+                return;
+            }
+            if (user) {
+                res.send(new Response({
+                    username: user.username,
+                    country: user.country,
+                    userInfo: user.userInfo
+                }, 1, 'checkForUser'));
+            } else {
+                res.send(new Response({}, 0, 'checkForUser', err));
+            }
         });
     }
 };

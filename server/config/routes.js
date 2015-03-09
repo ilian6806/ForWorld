@@ -35,6 +35,8 @@ module.exports = function(app) {
     app.post(version + '/login/', controllers.users.login);
     app.post(version + '/register', controllers.users.register);
     app.post(version + '/getUserInfo', controllers.users.getUserInfo);
+    app.post(version + '/checkForUser', controllers.users.checkForUser);
+    app.post(version + '/updateUser', controllers.users.updateUser);
     app.get(version + '/getAllUsers', controllers.users.getAll);
 
     app.post(version + '/sendMessage', controllers.messages.sendMessage);
