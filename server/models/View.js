@@ -32,7 +32,7 @@ function fetchViewsData(views, messagesArr, usersArr, callback) {
                     var user = getItemFromCollection(users, 'userId', userId);
                     this.username = user.username;
                     this.userCountry = user.country;
-                    delete this.userId;
+                    //delete this.userId;
                 });
             });
             callback(views);
@@ -69,9 +69,11 @@ viewsSchema.statics.getViewsPerMessage = function(views, callback) {
         };
         views.filter(function(el) {
             if (el.messageId == that) {
+                var formatedDate = formatDate(el.date).split(' ');
                 messageView.users.push({
                     userId: el.viewerId,
-                    date: el.date
+                    date: formatedDate[0],
+                    time: formatedDate[1]
                 });
             }
         });

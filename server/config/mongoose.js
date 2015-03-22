@@ -21,6 +21,6 @@ module.exports = function(config) {
         console.log('DB error: ' + err);
     });
 
-    user.seedInitialUsers();
-    message.seedInitialMessages();
+    // user.seedInitialUsers();
+    // message.seedInitialMessages();
 };
